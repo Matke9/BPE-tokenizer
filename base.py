@@ -21,5 +21,11 @@ class AbstractTokenizer(ABC):
         pass
 
     def decode(self, tokens):
-        raise NotImplementedError("Decode method not implemented.") #implement in next session
-
+        text = ''
+        for token in tokens:
+            if token in self.vocab:
+                text += self.vocab[token]
+            else:
+                text += token
+        text = text.replace('Ġ', ' ')
+        return text
