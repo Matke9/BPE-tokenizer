@@ -37,10 +37,14 @@ class AbstractTokenizer(ABC):
             json.dump(merges_list, file, ensure_ascii=False, indent=2)
 
     def load_vocab_and_merges(self, vocab_path, merges_path):
+        self.vocab = {}
+        self.inv_vocab = {}
+        self.bpe_merges = {}
+        self.bpe_ranks = {}
         with open(vocab_path, "r", encoding="utf-8") as file:
             loaded_vocab = json.load(file)
-            self.vocab = {int(k): v for k, v in loaded_vocab.items() }
-            self.inv_vocab = {v: int(k) for k, v in loaded_vocab.items() }
+            self.vocab = {int(k): v for k, v in loaded_vocab.items()}
+            self.inv_vocab = {v: int(k) for k, v in loaded_vocab.items()}
         with open(merges_path, "r", encoding="utf-8") as file:
             loaded_merges = json.load(file)
             for merge in loaded_merges:
