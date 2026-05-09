@@ -11,7 +11,7 @@ class AbstractTokenizer(ABC):
         self.bpe_ranks = {}
 
     @abstractmethod
-    def encode(self, text):
+    def encode(self, text, allowed_special):
         pass
 
     @abstractmethod
